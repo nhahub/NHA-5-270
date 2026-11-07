@@ -1,0 +1,10 @@
+supplier_id,supplier_name,historical_on_time_rate
+S01,Alpha General Pharma,0.93
+S02,Beta Antibiotics Co.,0.9
+S03,Gamma Hospital Supplies,0.92
+S04,Delta Cold Chain Biologicals,0.88
+S05,Epsilon Anticoagulant Distribution,0.94
+S06,Zeta Controlled Medicines (licensed),0.8
+S07,Eta Emergency & Anesthesia,0.91
+S08,Theta Fluids & Consumables,0.95
+S09,SCMS - Regional Distribution Center (RDC),0.9

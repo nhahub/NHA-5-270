@@ -1,0 +1,31 @@
+item_id,item_name,category,criticality,unit,unit_cost_egp,shelf_life_days,cold_chain,default_supplier_id,baseline_lead_time_days
+I001,Paracetamol 1g/100ml IV,Analgesic,Essential,vial,18,730,N,S01,4
+I002,Ceftriaxone 1g inj,Antibiotic,Critical,vial,22,730,N,S02,5
+I003,Meropenem 1g inj,Antibiotic,Critical,vial,95,730,N,S02,6
+I004,Vancomycin 1g inj,Antibiotic,Critical,vial,60,730,N,S02,6
+I005,Amoxicillin-Clavulanate 1.2g inj,Antibiotic,Essential,vial,28,730,N,S03,5
+I006,Ciprofloxacin 400mg IV,Antibiotic,Essential,bag,30,730,N,S03,5
+I007,Insulin Regular 100IU/ml,Antidiabetic,Critical,vial,70,540,Y,S04,7
+I008,Insulin Glargine pen,Antidiabetic,Essential,pen,280,540,Y,S04,7
+I009,Heparin 5000IU/ml,Anticoagulant,Critical,vial,45,730,N,S05,5
+I010,Enoxaparin 40mg syringe,Anticoagulant,Essential,syringe,85,730,N,S05,5
+I011,Morphine 10mg/ml,Opioid,Critical,ampoule,25,730,N,S06,9
+I012,Fentanyl 100mcg/2ml,Opioid,Essential,ampoule,20,730,N,S06,9
+I013,Midazolam 5mg/ml,Sedative,Critical,ampoule,15,730,N,S06,9
+I014,Propofol 1% 20ml,Anesthetic,Critical,vial,40,730,N,S07,6
+I015,Epinephrine (Adrenaline) 1mg/ml,Emergency,Critical,ampoule,12,730,N,S07,6
+I016,Atropine 1mg/ml,Emergency,Essential,ampoule,8,730,N,S07,6
+I017,Norepinephrine 4mg/4ml,Vasopressor,Critical,ampoule,55,730,N,S07,6
+I018,Furosemide 20mg inj,Diuretic,Essential,ampoule,6,730,N,S03,5
+I019,Oxytocin 10IU/ml,Obstetric,Critical,ampoule,14,540,Y,S04,7
+I020,Magnesium Sulfate 50%,Obstetric,Critical,ampoule,10,730,N,S03,5
+I021,Tranexamic Acid 500mg/5ml,Hemostatic,Critical,ampoule,20,730,N,S05,5
+I022,Hydrocortisone 100mg inj,Steroid,Essential,vial,18,730,N,S03,5
+I023,Dexamethasone 8mg inj,Steroid,Essential,ampoule,7,730,N,S03,5
+I024,Salbutamol 2.5mg nebule,Respiratory,Essential,nebule,5,730,N,S08,4
+I025,Omeprazole 40mg IV,Gastrointestinal,Essential,vial,22,730,N,S03,5
+I026,Ondansetron 4mg inj,Antiemetic,Essential,ampoule,9,730,N,S03,5
+I027,Sodium Chloride 0.9% 1L,IV Fluid,Critical,bag,14,1095,N,S08,3
+I028,Ringer Lactate 1L,IV Fluid,Essential,bag,16,1095,N,S08,3
+I029,Dextrose 5% 500ml,IV Fluid,Essential,bag,12,1095,N,S08,3
+I030,IV Cannula 20G,Consumable,Essential,piece,4,1825,N,S08,3

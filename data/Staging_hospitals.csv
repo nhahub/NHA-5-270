@@ -1,0 +1,5 @@
+hospital_id,hospital_name,hospital_type,beds
+H-A,Hospital A - University Teaching Hospital,Teaching,600
+H-B,Hospital B - General Hospital,General,350
+H-C,Hospital C - District Hospital,District,150
+H-D,Hospital D - Maternity & Children's Hospital,Specialty,200
