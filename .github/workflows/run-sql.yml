@@ -44,8 +44,8 @@ jobs:
       - name: Create Staging Tables and Import CSV Data via T-SQL
         run: |
           docker exec sqlserver /opt/mssql-tools18/bin/sqlcmd \
-            -S localhost -U sa -P "StrongPassword123!" -C -Q "
-            USE SupplyChainProject_DB;
+            -S localhost -U sa -P "YourStrong@Passw0rd" -C -i 
+            "scripts/Task11_Integrity_Checks_FINAL.sql";
             
             --  Staging_in
             CREATE TABLE Staging_in (
