@@ -6,6 +6,10 @@ on:
   pull_request:
     branches: [ main, master ]
 
+env:
+  MSSQL_SA_PASSWORD: 'StrongPassword123!'
+  SQLCMD: /opt/mssql-tools18/bin/sqlcmd
+
 jobs:
   run-sql-pipeline:
     runs-on: ubuntu-latest
@@ -16,60 +20,47 @@ jobs:
 
       - name: Start SQL Server 2022 Container
         run: |
-          docker run -e "ACCEPT_EULA=Y" -e "SA_PASSWORD=StrongPassword123!" \
+          docker run -e "ACCEPT_EULA=Y" -e "MSSQL_SA_PASSWORD=$MSSQL_SA_PASSWORD" \
             -p 1433:1433 --name sqlserver -d mcr.microsoft.com/mssql/server:2022-latest
 
       - name: Wait for SQL Server to Initialize
         run: |
           echo "Waiting for SQL Server service to be up..."
-          until docker exec sqlserver /opt/mssql-tools18/bin/sqlcmd \
-            -S localhost -U sa -P "StrongPassword123!" -C -Q "SELECT 1" > /dev/null 2>&1; do
+          for i in $(seq 1 40); do
+            if docker exec sqlserver $SQLCMD -S localhost -U sa -P "$MSSQL_SA_PASSWORD" -C -Q "SELECT 1" > /dev/null 2>&1; then
+              echo "SQL Server is online and ready."
+              exit 0
+            fi
             sleep 3
           done
-          echo "SQL Server is online and ready."
+          echo "SQL Server did not start in time."
+          docker logs sqlserver
+          exit 1
 
       - name: Create Database SupplyChainProject_DB
         run: |
-          docker exec sqlserver /opt/mssql-tools18/bin/sqlcmd \
-            -S localhost -U sa -P "StrongPassword123!" -C \
+          docker exec sqlserver $SQLCMD \
+            -S localhost -U sa -P "$MSSQL_SA_PASSWORD" -C -b \
             -Q "CREATE DATABASE SupplyChainProject_DB;"
 
       - name: Transfer CSV Data and Scripts into Container
         run: |
+          # CSVs may be committed with CRLF on Windows; make them LF so BULK INSERT (ROWTERMINATOR 0x0a) is exact
+          sed -i 's/\r$//' ./data/*.csv
           docker exec sqlserver mkdir -p /var/opt/mssql/data_files
           docker exec sqlserver mkdir -p /var/opt/mssql/sql_scripts
           docker cp ./data/. sqlserver:/var/opt/mssql/data_files/
           docker cp ./scripts/. sqlserver:/var/opt/mssql/sql_scripts/
+          docker exec -u root sqlserver chmod -R a+rX /var/opt/mssql/data_files /var/opt/mssql/sql_scripts
 
       - name: Create Staging Tables and Import CSV Data via T-SQL
         run: |
-          docker exec sqlserver /opt/mssql-tools18/bin/sqlcmd \
-            -S localhost -U sa -P "YourStrong@Passw0rd" -C -i 
-            "scripts/Task11_Integrity_Checks_FINAL.sql";
-            
-            --  Staging_in
-            CREATE TABLE Staging_in (
-                id NVARCHAR(100),
-                country NVARCHAR(255),
-                [pq first sent to client date] NVARCHAR(100),
-                [po sent to vendor da- name: Create Staging Tables and Import CSV Data via T-SQL
-      run: |
-        docker exec -i sqlserver /opt/mssql-tools18/bin/sqlcmd -S localhost -U sa -P "YourStrong@Passw0rd" -C -i /var/opt/sql_scripts/Task11_Integrity_Checks_FINAL.sqlte] NVARCHAR(100),
-                [weight (kilograms)] NVARCHAR(100),
-                [freight cost (usd)] NVARCHAR(100),
-                dosage NVARCHAR(100),
-                receiving_inspection_result NVARCHAR(100),
-                batch_number NVARCHAR(100),
-                expiry_date NVARCHAR(100)
-            );
-            
-            BULK INSERT Staging_in
-            FROM '/var/opt/mssql/data_files/Staging_in.csv'
-            WITH ( FORMAT = 'CSV', FIRSTROW = 2, FIELDTERMINATOR = ',', ROWTERMINATOR = '\n', TABLOCK );
+          docker exec sqlserver $SQLCMD \
+            -S localhost -U sa -P "$MSSQL_SA_PASSWORD" -C -b \
+            -i /var/opt/mssql/sql_scripts/01_Create_Staging_Tables_and_Import.sql
 
-          
- - name: Run Task 11 Integrity Checks Script
-   run: |
-   docker exec sqlserver /opt/mssql-tools18/bin/sqlcmd \
-    -S localhost -U sa -P "StrongPassword123!" -C \
-   -i /var/opt/mssql/sql_scripts/Task11_Integrity_Checks_FINAL.sql
+      - name: Run Task 11 Integrity Checks Script
+        run: |
+          docker exec sqlserver $SQLCMD \
+            -S localhost -U sa -P "$MSSQL_SA_PASSWORD" -C -b \
+            -i /var/opt/mssql/sql_scripts/Task11_Integrity_Checks_FINAL.sql
