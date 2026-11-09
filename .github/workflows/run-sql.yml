@@ -52,7 +52,9 @@ jobs:
                 id NVARCHAR(100),
                 country NVARCHAR(255),
                 [pq first sent to client date] NVARCHAR(100),
-                [po sent to vendor date] NVARCHAR(100),
+                [po sent to vendor da- name: Create Staging Tables and Import CSV Data via T-SQL
+      run: |
+        docker exec -i sqlserver /opt/mssql-tools18/bin/sqlcmd -S localhost -U sa -P "YourStrong@Passw0rd" -C -i /var/opt/sql_scripts/Task11_Integrity_Checks_FINAL.sqlte] NVARCHAR(100),
                 [weight (kilograms)] NVARCHAR(100),
                 [freight cost (usd)] NVARCHAR(100),
                 dosage NVARCHAR(100),
@@ -66,9 +68,8 @@ jobs:
             WITH ( FORMAT = 'CSV', FIRSTROW = 2, FIELDTERMINATOR = ',', ROWTERMINATOR = '\n', TABLOCK );
 
           
-
-      - name: Run Task 11 Integrity Checks Script
-        run: |
-          docker exec sqlserver /opt/mssql-tools18/bin/sqlcmd \
-            -S localhost -U sa -P "StrongPassword123!" -C \
-            -i /var/opt/mssql/sql_scripts/Task11_Integrity_Checks_FINAL.sql
+ - name: Run Task 11 Integrity Checks Script
+   run: |
+   docker exec sqlserver /opt/mssql-tools18/bin/sqlcmd \
+    -S localhost -U sa -P "StrongPassword123!" -C \
+   -i /var/opt/mssql/sql_scripts/Task11_Integrity_Checks_FINAL.sql
