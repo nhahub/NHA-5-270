@@ -55,7 +55,7 @@ CREATE TABLE dbo.Staging_in (
 GO
 BULK INSERT dbo.Staging_in
 FROM '/var/opt/mssql/data_files/Staging_in.csv'
-WITH (FORMAT = 'CSV', FIRSTROW = 2, FIELDTERMINATOR = ',', ROWTERMINATOR = '0x0a', TABLOCK); TABLOCK);
+WITH (FORMAT = 'CSV', FIRSTROW = 2, FIELDTERMINATOR = ',', ROWTERMINATOR = '0x0a', TABLOCK);
 GO
 
 /* Staging_inventory_daily  (20 columns, 10793 data rows) */
@@ -86,7 +86,7 @@ CREATE TABLE dbo.Staging_inventory_daily (
 GO
 BULK INSERT dbo.Staging_inventory_daily
 FROM '/var/opt/mssql/data_files/Staging_inventory_daily.csv'
-WITH (FORMAT = 'CSV', FIRSTROW = 2, FIELDTERMINATOR = ',', ROWTERMINATOR = '0x0a', TABLOCK); TABLOCK);
+WITH (FORMAT = 'CSV', FIRSTROW = 2, FIELDTERMINATOR = ',', ROWTERMINATOR = '0x0a', TABLOCK);
 GO
 
 /* Staging_purchase_orders  (12 columns, 2187 data rows) */
@@ -109,7 +109,7 @@ CREATE TABLE dbo.Staging_purchase_orders (
 GO
 BULK INSERT dbo.Staging_purchase_orders
 FROM '/var/opt/mssql/data_files/Staging_purchase_orders.csv'
-WITH (FORMAT = 'CSV', FIRSTROW = 2, FIELDTERMINATOR = ',', ROWTERMINATOR = '0x0a', TABLOCK); TABLOCK);
+WITH (FORMAT = 'CSV', FIRSTROW = 2, FIELDTERMINATOR = ',', ROWTERMINATOR = '0x0a', TABLOCK);
 GO
 
 /* Staging_patient_cases  (15 columns, 5665 data rows) */
@@ -135,7 +135,7 @@ CREATE TABLE dbo.Staging_patient_cases (
 GO
 BULK INSERT dbo.Staging_patient_cases
 FROM '/var/opt/mssql/data_files/Staging_patient_cases.csv'
-WITH (FORMAT = 'CSV', FIRSTROW = 2, FIELDTERMINATOR = ',', ROWTERMINATOR = '0x0a', TABLOCK); TABLOCK);
+WITH (FORMAT = 'CSV', FIRSTROW = 2, FIELDTERMINATOR = ',', ROWTERMINATOR = '0x0a', TABLOCK);
 GO
 
 /* Staging_hospitals  (4 columns, 4 data rows) */
@@ -150,7 +150,7 @@ CREATE TABLE dbo.Staging_hospitals (
 GO
 BULK INSERT dbo.Staging_hospitals
 FROM '/var/opt/mssql/data_files/Staging_hospitals.csv'
-WITH (FORMAT = 'CSV', FIRSTROW = 2, FIELDTERMINATOR = ',', ROWTERMINATOR = '0x0a', TABLOCK); TABLOCK);
+WITH (FORMAT = 'CSV', FIRSTROW = 2, FIELDTERMINATOR = ',', ROWTERMINATOR = '0x0a', TABLOCK);
 GO
 
 /* Staging_items  (10 columns, 30 data rows) */
@@ -171,7 +171,7 @@ CREATE TABLE dbo.Staging_items (
 GO
 BULK INSERT dbo.Staging_items
 FROM '/var/opt/mssql/data_files/Staging_items.csv'
-WITH (FORMAT = 'CSV', FIRSTROW = 2, FIELDTERMINATOR = ',', ROWTERMINATOR = '0x0a', TABLOCK); TABLOCK);
+WITH (FORMAT = 'CSV', FIRSTROW = 2, FIELDTERMINATOR = ',', ROWTERMINATOR = '0x0a', TABLOCK);
 GO
 
 /* Staging_suppliers  (3 columns, 9 data rows) */
@@ -185,7 +185,7 @@ CREATE TABLE dbo.Staging_suppliers (
 GO
 BULK INSERT dbo.Staging_suppliers
 FROM '/var/opt/mssql/data_files/Staging_suppliers.csv'
-WITH (FORMAT = 'CSV', FIRSTROW = 2, FIELDTERMINATOR = ',', ROWTERMINATOR = '0x0a', TABLOCK); TABLOCK);
+WITH (FORMAT = 'CSV', FIRSTROW = 2, FIELDTERMINATOR = ',', ROWTERMINATOR = '0x0a', TABLOCK);
 GO
 
 /* Row-count check: the step fails if any table was not loaded completely */
